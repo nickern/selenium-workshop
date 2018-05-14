@@ -9,6 +9,7 @@ public class Exercise3 {
      *  1. Go to the front page and select a manufacturer of your choice.
      *  2. Assert that the list of phones from the selected manufacturer is larger than 0.
      *  3. Print name list to console.
+     *  4. (Optional) count all devices listed from all manufactureres, starting with the maker list on the front page
      *
      */
 }
