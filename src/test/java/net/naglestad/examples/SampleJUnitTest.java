@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertTrue;
 
-public class SampleJunitTest extends TestBase {
+public class SampleJUnitTest extends TestBase {
 
     private String testBaseUrl = "https://www.vinmonopolet.no/";
 

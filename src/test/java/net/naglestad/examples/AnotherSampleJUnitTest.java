@@ -9,10 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class AnotherSampleJunitTest extends TestBase {
+public class AnotherSampleJUnitTest extends TestBase {
 
     private SearchPage searchPage;
     private ProductPage productPage;
