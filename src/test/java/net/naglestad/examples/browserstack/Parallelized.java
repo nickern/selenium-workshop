@@ -7,35 +7,39 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Forked from: https://github.com/browserstack/junit-browserstack
+ */
+
 public class Parallelized extends Parameterized {
 
-  private static class ThreadPoolScheduler implements RunnerScheduler {
-    private ExecutorService executor; 
+    private static class ThreadPoolScheduler implements RunnerScheduler {
+        private ExecutorService executor;
 
-    public ThreadPoolScheduler() {
-      String threads = System.getProperty("junit.parallel.threads", "16");
-      int numThreads = Integer.parseInt(threads);
-      executor = Executors.newFixedThreadPool(numThreads);
+        public ThreadPoolScheduler() {
+            String threads = System.getProperty("junit.parallel.threads", "16");
+            int numThreads = Integer.parseInt(threads);
+            executor = Executors.newFixedThreadPool(numThreads);
+        }
+
+        @Override
+        public void finished() {
+            executor.shutdown();
+            try {
+                executor.awaitTermination(10, TimeUnit.MINUTES);
+            } catch (InterruptedException exc) {
+                throw new RuntimeException(exc);
+            }
+        }
+
+        @Override
+        public void schedule(Runnable childStatement) {
+            executor.submit(childStatement);
+        }
     }
 
-    @Override
-    public void finished() {
-      executor.shutdown();
-      try {
-        executor.awaitTermination(10, TimeUnit.MINUTES);
-      } catch (InterruptedException exc) {
-        throw new RuntimeException(exc);
-      }
+    public Parallelized(Class klass) throws Throwable {
+        super(klass);
+        setScheduler(new ThreadPoolScheduler());
     }
-
-    @Override
-    public void schedule(Runnable childStatement) {
-      executor.submit(childStatement);
-    }
-  }
-
-  public Parallelized(Class klass) throws Throwable {
-    super(klass);
-    setScheduler(new ThreadPoolScheduler());
-  }
 }

@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 
 public class SampleJUnitTest extends TestBase {
 
-    private String testBaseUrl = "https://www.vinmonopolet.no/";
+    private String testBaseUrl = "http://www.vinmonopolet.no/";
 
     @Test
     public void testGetProductAlmande() {
