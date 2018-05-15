@@ -3,9 +3,10 @@
   "user": "BROWSERSTACK_USERNAME",
   "key": "BROWSERSTACK_ACCESS_KEY",
   "capabilities": {
+    "project" : "Selenium Workshop Demo",
     "build": "0.1.0-SNAPSHOT",
-    "name": "BrowserStack Examples",
-    "browserstack.debug": true
+    "browserstack.debug": true,
+    "browserstack.timezone" : "Europe/Oslo"
   },
   "environments": [
     {
@@ -28,9 +29,13 @@
     },
     {
       "os" : "Windows",
-      "os_version" : "7",
+      "os_version" : "10",
       "browserName" : "IE",
-      "browser_version" : "8.0"
+      "browser_version" : "11.0"
+    },
+    {
+      "os_version" : "9.1",
+      "device" : "iPhone 6S"
     }
   ]
 }

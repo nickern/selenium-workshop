@@ -6,13 +6,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchPage extends Page {
 
-    private String url = "https://www.vinmonopolet.no/";
+    private String url = "http://www.vinmonopolet.no/";
 
     @FindBy(how = How.CSS, using = "div.site-search input")
     @CacheLookup
@@ -50,6 +53,9 @@ public class SearchPage extends Page {
     private WebElement getSearchResults(String query) {
         searchField.sendKeys(query);
         searchField.submit();
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#search-results")));
 
         // search results must be found - throws exception if missing
         return driver.findElement(By.cssSelector("#search-results"));
